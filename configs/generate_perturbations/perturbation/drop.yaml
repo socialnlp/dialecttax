@@ -1,0 +1,4 @@
+name: drop-${perturbation.kwargs.p}
+fn: drop
+kwargs:
+  p: 0.15

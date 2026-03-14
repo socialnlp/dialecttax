@@ -1,0 +1,6 @@
+name: qwen_32b
+max_tokens_new:
+  naive: 64
+  cot: 2048
+max_tokens_reasoning:
+  naive: 1

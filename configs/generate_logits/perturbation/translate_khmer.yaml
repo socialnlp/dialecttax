@@ -1,0 +1,4 @@
+name: translate-khmer
+fn: translate
+kwargs:
+  language: khmer

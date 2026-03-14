@@ -1,0 +1,4 @@
+name: translate-${language.name}
+fn: translate
+kwargs:
+  target_language: ${language.code}

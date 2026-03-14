@@ -1,0 +1,4 @@
+name: translate-chinese
+fn: translate
+kwargs:
+  language: chinese

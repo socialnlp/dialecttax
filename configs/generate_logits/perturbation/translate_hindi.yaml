@@ -1,0 +1,4 @@
+name: translate-hindi
+fn: translate
+kwargs:
+  language: hindi

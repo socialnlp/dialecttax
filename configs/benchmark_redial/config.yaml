@@ -1,0 +1,35 @@
+defaults:
+  - model: llama_8b
+  - task: math
+  - reasoning: naive
+  - dialect: sae
+  - _self_
+
+# Project config (passed to dialecttax.utils.load_config)
+project_config: default
+experiment: benchmark_redial
+dataset: redial
+
+# Experiment parameters
+run_test: false
+rerun: false
+max_workers: 16
+
+# Generation parameters
+temperature: 0.2
+max_tokens_new: 32
+max_tokens_reasoning: 0
+
+# Hydra parameters
+hydra:
+  job:
+    name: benchmark_redial-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${task.name}/${dialect.name}/${reasoning.name}/${model.name}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${task.name}/${dialect.name}/${reasoning.name}/${model.name}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING

@@ -1,0 +1,4 @@
+name: naive
+max_tokens_new:
+  base: 256
+  instruct: 10

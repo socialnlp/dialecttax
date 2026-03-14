@@ -1,0 +1,30 @@
+defaults:
+  - dataset: redial
+  - task: math
+  - dialect: sae
+  - optional perturbation: null
+  - optional language: null
+  - optional capitalization_type: null
+  - _self_
+
+project_config: server
+experiment: generate_embeddings
+rerun: false
+dim: 768
+batch_size: 256
+device: "cuda:0"
+
+hydra:
+  job:
+    name: generate_embeddings-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${dataset.name}/${dataset.output_subdir}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${dataset.name}/${dataset.output_subdir}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING
+      sentence_transformers:
+        level: WARNING

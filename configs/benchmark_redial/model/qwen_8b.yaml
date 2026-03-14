@@ -1,0 +1,3 @@
+name: qwen_8b
+max_tokens_reasoning:
+  naive: 1

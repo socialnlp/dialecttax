@@ -1,0 +1,28 @@
+defaults:
+  - reward_model: skywork_llama_8b
+  - dataset: redial
+  - task: math
+  - dialect: sae
+  - _self_
+
+# Project config (passed to dialecttax.utils.load_config)
+project_config: default
+experiment: generate_rewards_hidden_states
+rerun: false
+
+# Device
+device: "auto"
+
+# Hydra parameters
+hydra:
+  job:
+    name: generate_rewards_hidden_states-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${reward_model.name}/${dataset.name}/${dataset.output_subdir}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${reward_model.name}/${dataset.name}/${dataset.output_subdir}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING

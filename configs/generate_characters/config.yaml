@@ -1,0 +1,52 @@
+defaults:
+  - model: llama_8b_base
+  - dataset: redial
+  - task: math
+  - dialect: sae
+  - reasoning: naive
+  - _self_
+
+# Project config (passed to dialecttax.utils.load_config)
+project_config: default
+experiment: generate_characters
+rerun: false
+
+# Device
+device: "auto"
+
+# When true, skip input_log_probs / input_entropy / hidden computation and
+# save only metadata.jsonl. Use for the big models (Llama-70B, Gemma-27B,
+# Qwen-32B) where the side outputs dominate runtime.
+answer_only: false
+
+# When false (and answer_only=false), recover input metrics from a separate
+# prompt-only forward pass and skip per-step hidden states during generation
+# — keeps input_mean_entropy + answer_entropy in metadata.jsonl without
+# materializing per-step hidden states. Skips .npz outputs entirely. Use for
+# big models where per-step hidden states dominate generation memory.
+compute_hidden: true
+
+# Samples per generate() call. Char-level prompts are long, so memory limits
+# kick in fast — keep low (1-4) for ≥12B models, can push higher for small.
+batch_size: 1
+
+# Batch size for a full-config generation. Null means "same as batch_size".
+# verify_characters sets this larger than batch_size: its probe must reuse the
+# batch generate wrote with (padding changes the entropies enough to trip
+# _entropy_close), but the full recompute is unconstrained and dominated by
+# 1024 sequential decode steps, which batching cuts linearly.
+compute_batch_size: null
+
+# Hydra parameters
+hydra:
+  job:
+    name: generate_characters-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${model.name}/${dataset.name}/${dataset.output_subdir}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${model.name}/${dataset.name}/${dataset.output_subdir}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING

@@ -1,0 +1,5 @@
+name: parallelaave
+dir_key: datasets
+row_text: text
+row_names: [unique_id]
+dialects: [sae, aave]

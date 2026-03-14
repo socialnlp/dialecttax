@@ -1,0 +1,33 @@
+defaults:
+  - model: llama_8b_base
+  - dataset: redial
+  - task: math
+  - dialect: sae
+  - perturbation: none
+  - _self_
+
+# Project config (passed to dialecttax.utils.load_config)
+project_config: default
+experiment: generate_gradients
+rerun: false
+
+# Device
+device: "auto"
+
+# Gradient projection
+projection_dim: 8192
+seed: 42
+
+# Hydra parameters
+hydra:
+  job:
+    name: generate_gradients-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${model.name}/${dataset.name}/${dataset.output_subdir}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${model.name}/${dataset.name}/${dataset.output_subdir}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING

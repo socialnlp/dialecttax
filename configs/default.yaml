@@ -1,0 +1,9 @@
+keys:
+  openrouter: {repo}/secrets/api_key_openrouter.txt
+  gcloud: {repo}/secrets/api_key_gcloud.txt
+
+directories:
+  dialecttax: {repo}
+  datasets: {repo}/data/datasets
+  experiments: {repo}/data/experiments
+  preprocessed: {repo}/data/preprocessed

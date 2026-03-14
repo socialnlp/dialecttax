@@ -1,0 +1,4 @@
+name: capitalize-${capitalization_type.name}
+fn: capitalize
+kwargs:
+  mode: ${capitalization_type.mode}

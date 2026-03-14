@@ -1,0 +1,4 @@
+name: translate-polish
+fn: translate
+kwargs:
+  language: polish

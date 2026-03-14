@@ -1,0 +1,24 @@
+defaults:
+  - dataset: redial
+  - task: math
+  - dialect: sae
+  - _self_
+
+# Project config (passed to dialecttax.utils.load_config)
+project_config: default
+experiment: generate_words
+rerun: false
+
+# Hydra parameters
+hydra:
+  job:
+    name: generate_words-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${dataset.name}/${dataset.output_subdir}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${dataset.name}/${dataset.output_subdir}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING

@@ -1,0 +1,21 @@
+# Conda entry point, for people who already work in conda or who need conda to
+# supply the Python 3.14 interpreter (e.g. no permission to install uv natively).
+#
+# This file deliberately does NOT duplicate the dependency list. Conda provides
+# the interpreter and uv; `uv sync` then installs the exact versions recorded in
+# uv.lock. pyproject.toml + uv.lock remain the single source of truth, so the
+# conda path and the pure-uv path resolve to identical package versions.
+#
+#     conda env create -f environment.yml
+#     conda activate dialecttax
+#     uv sync --extra dev --active
+#
+# Note the --active flag: without it uv builds its own .venv and ignores the
+# activated conda env.
+name: dialecttax
+channels:
+  - conda-forge
+dependencies:
+  - python=3.14
+  - uv>=0.9
+  - pip

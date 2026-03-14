@@ -1,0 +1,34 @@
+defaults:
+  - model: llama_base
+  - reasoning: naive
+  - _self_
+
+dialects:
+  - name: sae
+    path_file: ReDial/math_sae.jsonl
+  - name: aave
+    path_file: ReDial/math_aave.jsonl
+
+# Project config (passed to dialecttax.utils.load_config)
+project_config: default
+dataset: redial_sp
+
+# SP parameters
+m: 10
+batch_size: 4
+n_few_shot: 5
+seed: 42
+rerun: false
+
+hydra:
+  job:
+    name: surprisingly_popular-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${dataset}/${model.name}/${reasoning.name}
+  sweep:
+    dir: ${project:experiments}/${dataset}
+    subdir: ${model.name}/${reasoning.name}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING

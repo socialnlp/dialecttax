@@ -1,0 +1,4 @@
+name: cot
+max_tokens_new:
+  base: 1024
+  instruct: 1024

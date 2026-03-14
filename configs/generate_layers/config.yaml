@@ -1,0 +1,36 @@
+defaults:
+  - model: llama_8b_base
+  - dataset: parallelaave
+  - task: math
+  - dialect: aave
+  - _self_
+
+# Project config (passed to dialecttax.utils.load_config)
+project_config: default
+experiment: generate_layers
+rerun: false
+
+# Optional transformation applied to SAE text (perturbed-SAE vs SAE control).
+# "none" = standard dialect-vs-SAE run. Otherwise a preprocessed perturbation
+# name, e.g. swap-0.05, capitalize-random, translate-french.
+perturbation: none
+
+# Device
+device: "auto"
+
+# Batch size for hidden state extraction
+batch_size: 8
+
+# Hydra parameters
+hydra:
+  job:
+    name: generate_layers-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${model.name}/${dataset.name}/${dialect.name}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${model.name}/${dataset.name}/${dialect.name}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING

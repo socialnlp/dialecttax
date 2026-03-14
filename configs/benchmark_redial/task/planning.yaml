@@ -1,0 +1,7 @@
+name: planning
+max_tokens_new:
+  naive: 512
+  cot: 1024
+max_tokens_reasoning:
+  naive: 0
+  cot: 256

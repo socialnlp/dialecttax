@@ -1,0 +1,6 @@
+name: redial
+dir_key: preprocessed
+row_names: [unique_id]
+dialects: [sae, aave]
+tasks: [math, algorithm, logic, planning]
+output_subdir: ${task.name}/${dialect.name}

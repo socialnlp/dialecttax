@@ -1,0 +1,4 @@
+name: translate-yoruba
+fn: translate
+kwargs:
+  language: yoruba

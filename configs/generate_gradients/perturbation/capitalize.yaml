@@ -1,0 +1,4 @@
+name: capitalize-${perturbation.kwargs.mode}
+fn: capitalize
+kwargs:
+  mode: random

@@ -1,0 +1,4 @@
+name: qwen_1.7b_instruct
+model_id: Qwen/Qwen3-1.7B
+max_tokens_new:
+  cot: 2048

@@ -1,0 +1,22 @@
+defaults:
+  - dataset: redial
+  - task: math
+  - dialect: sae
+  - perturbation: swap
+  - optional language: null
+  - optional capitalization_type: null
+  - _self_
+
+project_config: default
+experiment: generate_perturbations
+rerun: false
+seed: 42
+
+hydra:
+  job:
+    name: generate_perturbations-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${dataset.name}/${dataset.output_subdir}/${perturbation.name}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${dataset.name}/${dataset.output_subdir}/${perturbation.name}

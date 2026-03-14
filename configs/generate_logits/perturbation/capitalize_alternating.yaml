@@ -1,0 +1,4 @@
+name: capitalize-alternating
+fn: capitalize
+kwargs:
+  mode: alternating

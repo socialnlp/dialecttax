@@ -1,0 +1,3 @@
+name: cot
+max_tokens_new: 1024
+max_tokens_reasoning: 256

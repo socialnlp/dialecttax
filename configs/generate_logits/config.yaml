@@ -1,0 +1,36 @@
+defaults:
+  - model: llama_8b_base
+  - dataset: redial
+  - task: math
+  - dialect: sae
+  - reasoning: naive
+  - perturbation: none
+  - _self_
+
+# Project config (passed to dialecttax.utils.load_config)
+project_config: default
+experiment: generate_logits
+rerun: false
+
+# Device
+device: "auto"
+
+# Attention impl override (null = HF default). Set to "eager" to bypass SDPA NaN issues.
+attn_implementation: null
+
+# Generation
+batch_size: 4
+
+# Hydra parameters
+hydra:
+  job:
+    name: generate_logits-${now:%Y%m%d_%H%M%S}
+  run:
+    dir: ${project:experiments}/${experiment}/${model.name}/${dataset.name}/${dataset.output_subdir}
+  sweep:
+    dir: ${project:experiments}/${experiment}
+    subdir: ${model.name}/${dataset.name}/${dataset.output_subdir}
+  job_logging:
+    loggers:
+      httpx:
+        level: WARNING

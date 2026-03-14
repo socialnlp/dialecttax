@@ -1,0 +1,4 @@
+name: translate-french
+fn: translate
+kwargs:
+  language: french

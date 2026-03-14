@@ -1,0 +1,4 @@
+name: qwen_8b_base
+model_id: Qwen/Qwen3-8B-Base
+max_tokens_new:
+  cot: 2048

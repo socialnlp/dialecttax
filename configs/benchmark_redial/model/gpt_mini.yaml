@@ -1,0 +1,5 @@
+name: gpt_mini
+max_tokens_reasoning: null
+reasoning_effort:
+  naive: minimal
+  cot: minimal
